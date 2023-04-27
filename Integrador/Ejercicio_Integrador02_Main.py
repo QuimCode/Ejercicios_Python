@@ -40,9 +40,9 @@ while True:
             case 1:
                 normalizador_datos_stark(lista_personajes)
             case 2:
-                obtener_nombre(heroe)
+                stark_imprimir_nombres_heroes(lista_personajes)
             case 3:
-                max_altura_masculino()
+                stark_imprimir_nombres_alturas(lista_personajes)
             case 4:
                 max_altura_femenino()
             case 5:

@@ -286,12 +286,36 @@ def normalizador_datos_stark(lista_personajes):
     return lista_personajes
 
 def obtener_nombre(heroe):
-    return f"Nombre: {heroe['nombre']}"
+    nombre = heroe.get("nombre")
+    return f"Nombre: {nombre}"
 
-lista_personajes = [...] # lista de diccionarios con los personajes
+def imprimir_dato(dato):
+    print(dato)
 
-if not lista_personajes:
-    print("Error: Lista de personajes vacía")
-else:
+def stark_imprimir_nombres_heroes(lista_personajes):
+    if len(lista_personajes) == 0:
+        print("La lista de heroes está vacía")
+    else:
+        for heroe in lista_personajes:
+            nombre = obtener_nombre(heroe)
+            imprimir_dato(nombre)
+
+def obtener_nombre_y_dato(lista_personajes, nombre, altura):
     for heroe in lista_personajes:
-        print(obtener_nombre(heroe))
+        if heroe["nombre"] == nombre:
+            dato_fuerza = heroe.get(fuerza)
+            dato_altura = heroe.get(altura)
+            dato_peso = heroe.get(peso)
+            if dato_fuerza is None or dato_altura is None or dato_peso is None:
+                return "El héroe no tiene esos datos"
+            return f"Nombre: {nombre} | Fuerza: {dato_fuerza} | Altura: {dato_altura} | Peso: {dato_peso}"
+    return f"No se encontró un héroe con el nombre {nombre}"
+
+def stark_imprimir_nombres_alturas(lista_personajes):
+    if not lista_personajes:
+        return -1
+    for heroe in lista_personajes:
+        altura = obtener_nombre_y_dato(lista_personajes, heroe["nombre"], "altura")
+        if altura != "El héroe no tiene ese dato":
+            print(f"Nombre: {heroe['nombre']} | Altura: {altura}")
+
