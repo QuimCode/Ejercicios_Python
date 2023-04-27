@@ -247,4 +247,51 @@ def listar_heroes_por_iq(lista_personajes):
         for heroe in heroes:
             print(f"\n- {heroe}")
 
-#------------------------------------------------/FUNCIONES-#01/---------------------------------------------#
+#------------------------------------------------/FUNCIONES-#02/---------------------------------------------#
+
+def normalizador_datos_stark(lista_personajes):
+#---------------------------
+
+    """
+    DOCUMENTACION:: Función que recibe una lista de héroes y convierte al tipo de dato correcto solicitado en la consigna, 
+    en este caso... serian las keys (solo con las keys que representan datos numéricos) y valida primero que el tipo de dato
+    no sea del tipo al cual será casteado para evitar confusiones.
+
+    PARAMETROS: lista_heroes (list): es la lista que va a tomar para normalizar los datos obtenidos y solicitados.
+
+    RETORNO:  (list): Lista de héroes normalizada.
+    """
+
+#---------------------------
+
+    if not lista_personajes: # Compruebo si la lista esta vacia con el if not, y si lo esta retorno el resultado del print.
+        print("Error: Lista de héroes vacía")
+        return lista_personajes
+    
+    dato_modificado = False # Compruebo que el dato fue modificado a travez de una bandera.
+    
+    for heroe in lista_personajes:
+        for key, value in heroe.items():
+            if key in ["altura", "peso", "fuerza"]:
+                if isinstance(value, str) and value.replace('.', '', 1).isdigit():
+                    if "." in value:
+                        heroe[key] = float(value)
+                    else:
+                        heroe[key] = int(value)
+                    dato_modificado = True
+    
+    if dato_modificado:
+        print("Datos normalizados")
+    
+    return lista_personajes
+
+def obtener_nombre(heroe):
+    return f"Nombre: {heroe['nombre']}"
+
+lista_personajes = [...] # lista de diccionarios con los personajes
+
+if not lista_personajes:
+    print("Error: Lista de personajes vacía")
+else:
+    for heroe in lista_personajes:
+        print(obtener_nombre(heroe))
