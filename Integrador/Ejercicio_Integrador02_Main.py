@@ -19,20 +19,20 @@ while True:
     opcion = int(input("\n¿Qué dato desea obtener? \n"
                             "1. Convertidor de Datos \n"
                             "2. Nombre de Heroes \n"
-                            "3. Altura Maxima Masculino \n"
-                            "4. Altura Maxima Femenino \n"
-                            "5. Altura Minima Masculino \n"
-                            "6. Altura Minima Femenino \n"
-                            "7. Promedio de Altura Masculino \n"
-                            "8. Promedio de Altura Femenino \n"
-                            "9. Nombre de la Altura Maxima Masculina \n"
-                            "10. Nombres de las Alturas \n"
-                            "11. Tipo de Ojos \n"
-                            "12. Tipo de Pelo \n"
-                            "13. Tipo de IQ \n"
-                            "14. Lista Heroes Ojos \n"
-                            "15. Lista Heroes Pelo \n"
-                            "16. Lista Heroes IQ \n"
+                            "3. Imprimir Nombres/Alturas \n"
+                            "4. Imprimir Maximos/Minimos \n"
+                            # "5. Altura Minima Masculino \n"
+                            # "6. Altura Minima Femenino \n"
+                            # "7. Promedio de Altura Masculino \n"
+                            # "8. Promedio de Altura Femenino \n"
+                            # "9. Nombre de la Altura Maxima Masculina \n"
+                            # "10. Nombres de las Alturas \n"
+                            # "11. Tipo de Ojos \n"
+                            # "12. Tipo de Pelo \n"
+                            # "13. Tipo de IQ \n"
+                            # "14. Lista Heroes Ojos \n"
+                            # "15. Lista Heroes Pelo \n"
+                            # "16. Lista Heroes IQ \n"
                             "17. Salir \n"
                             "Ingrese un numero por favor: "))
 
@@ -44,7 +44,8 @@ while True:
             case 3:
                 stark_imprimir_nombres_alturas(lista_personajes)
             case 4:
-                max_altura_femenino()
+                stark_calcular_imprimir_heroe(lista_personajes, 'maximo', peso)
+                stark_calcular_imprimir_heroe(lista_personajes, 'minimo', peso)
             case 5:
                 min_altura_masculino()
             case 6:

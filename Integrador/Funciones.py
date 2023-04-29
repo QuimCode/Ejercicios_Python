@@ -250,7 +250,6 @@ def listar_heroes_por_iq(lista_personajes):
 #------------------------------------------------/FUNCIONES-#02/---------------------------------------------#
 
 def normalizador_datos_stark(lista_personajes):
-#---------------------------
 
     """
     DOCUMENTACION:: Función que recibe una lista de héroes y convierte al tipo de dato correcto solicitado en la consigna, 
@@ -261,8 +260,6 @@ def normalizador_datos_stark(lista_personajes):
 
     RETORNO:  (list): Lista de héroes normalizada.
     """
-
-#---------------------------
 
     if not lista_personajes: # Compruebo si la lista esta vacia con el if not, y si lo esta retorno el resultado del print.
         print("Error: Lista de héroes vacía")
@@ -286,13 +283,35 @@ def normalizador_datos_stark(lista_personajes):
     return lista_personajes
 
 def obtener_nombre(heroe):
+
+    """
+    DOCUMENTACIÓN: Función que recibe un diccionario que representa a un héroe y devuelve una cadena de texto con el nombre del mismo.
+    PARAMETROS: heroe (dict): Diccionario que representa a un héroe.
+    RETORNO: (str): Cadena de texto con el nombre del héroe.
+    """
+
+
     nombre = heroe.get("nombre")
-    return f"Nombre: {nombre}"
+    return f"Nombres: {nombre}"
 
 def imprimir_dato(dato):
+
+    """
+    DOCUMENTACIÓN: Función que recibe un dato y lo imprime por consola.
+    PARAMETROS: dato (any): Cualquier tipo de dato a imprimir.
+    RETORNO: Nada.
+    """
+
     print(dato)
 
 def stark_imprimir_nombres_heroes(lista_personajes):
+
+    """
+    DOCUMENTACIÓN: Función que recibe un dato y lo imprime por consola.
+    PARAMETROS: dato (any): Cualquier tipo de dato a imprimir.
+    RETORNO: Nada.
+    """
+
     if len(lista_personajes) == 0:
         print("La lista de heroes está vacía")
     else:
@@ -301,21 +320,92 @@ def stark_imprimir_nombres_heroes(lista_personajes):
             imprimir_dato(nombre)
 
 def obtener_nombre_y_dato(lista_personajes, nombre, altura):
+
+    """
+    DOCUMENTACIÓN: Función que recibe una lista de héroes y se encarga de imprimir por consola los nombres de cada uno.
+    PARAMETROS: lista_personajes (list): Lista de diccionarios que representa a cada héroe.
+    RETORNO: Nada.
+    """
+    
     for heroe in lista_personajes:
         if heroe["nombre"] == nombre:
-            dato_fuerza = heroe.get(fuerza)
             dato_altura = heroe.get(altura)
-            dato_peso = heroe.get(peso)
-            if dato_fuerza is None or dato_altura is None or dato_peso is None:
-                return "El héroe no tiene esos datos"
-            return f"Nombre: {nombre} | Fuerza: {dato_fuerza} | Altura: {dato_altura} | Peso: {dato_peso}"
+            if dato_altura is None:
+                return "El héroe no tiene ese dato"
     return f"No se encontró un héroe con el nombre {nombre}"
 
 def stark_imprimir_nombres_alturas(lista_personajes):
+
+    """
+    DOCUMENTACIÓN:  Función que recibe una lista de héroes y muestra en pantalla el nombre y la altura de aquellos héroes
+    que tengan una altura definida. Si la lista está vacía, se retorna un valor de -1.
+    PARAMETROS: lista_personajes (list): Lista de héroes a procesar.
+    RETORNO: - Si la lista está vacía, se retorna un valor de -1. Si la lista no está vacía, se muestran en pantalla el nombre y la
+    altura de los héroes que tengan una altura definida, pero no se retorna ningún valor.
+    """
+    
+
     if not lista_personajes:
         return -1
     for heroe in lista_personajes:
-        altura = obtener_nombre_y_dato(lista_personajes, heroe["nombre"], "altura")
-        if altura != "El héroe no tiene ese dato":
-            print(f"Nombre: {heroe['nombre']} | Altura: {altura}")
+        altura = heroe.get("altura")
+        if altura is not None:
+            mensaje = f"Nombre: {heroe['nombre']} | Altura: {altura}"
+            print(mensaje)
 
+peso = 'peso'
+
+def calcular_max(lista_personajes, peso):
+    if not lista_personajes:
+        return -1
+    max_hero = None
+    max_peso = 0
+    primer_dato = True
+    for hero in lista_personajes:
+        hero_peso = float(hero.get(peso, 0))
+        if primer_dato or hero_peso > max_peso:
+            max_hero = hero
+            max_peso = hero_peso
+            primer_dato = False
+    return max_hero, max_peso
+
+def calcular_min(lista_personajes, peso):
+    if not lista_personajes:
+        return -1
+    min_hero = None
+    min_peso = float('inf')
+    primer_dato = True
+    for hero in lista_personajes:
+        hero_peso = float(hero.get(peso, float('inf')))
+        if primer_dato or hero_peso < min_peso:
+            min_hero = hero
+            min_peso = hero_peso
+            primer_dato = False
+    return min_hero, min_peso
+
+def calcular_max_min_dato(lista_personajes, tipo_calculo, peso):
+    if not lista_personajes:
+        return "Lista vacía"
+    if tipo_calculo == 'maximo':
+        heroe, peso = calcular_max(lista_personajes, peso)
+    elif tipo_calculo == 'minimo':
+        heroe, peso = calcular_min(lista_personajes, peso)
+    else:
+        return "Tipo de cálculo no válido"
+    return heroe, peso
+
+
+def stark_calcular_imprimir_heroe(lista_personajes, tipo_calculo, peso):
+    heroe, valor_peso = calcular_max_min_dato(lista_personajes, tipo_calculo, peso)
+    if isinstance(heroe, str):
+        print(heroe)
+    else:
+        nombre = heroe['nombre']
+        if tipo_calculo == 'maximo':
+            mensaje = f"Mayor Peso {peso}: Nombre: {nombre} | {peso}: {valor_peso}"
+        else:
+            mensaje = f"Menor Peso {peso}: Nombre: {nombre} | {peso}: {valor_peso}"
+        print(mensaje)
+
+def sumar_dato_heroe(lista, key):
+    
