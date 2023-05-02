@@ -44,8 +44,8 @@ while True:
             case 3:
                 stark_imprimir_nombres_alturas(lista_personajes)
             case 4:
-                stark_calcular_imprimir_heroe(lista_personajes, 'maximo', peso)
-                stark_calcular_imprimir_heroe(lista_personajes, 'minimo', peso)
+                stark_calcular_imprimir_heroe(lista_personajes, 'maximo', 'altura')
+                stark_calcular_imprimir_heroe(lista_personajes, 'minimo', 'altura')
             case 5:
                 min_altura_masculino()
             case 6:

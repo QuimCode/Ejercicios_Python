@@ -353,59 +353,54 @@ def stark_imprimir_nombres_alturas(lista_personajes):
             mensaje = f"Nombre: {heroe['nombre']} | Altura: {altura}"
             print(mensaje)
 
-peso = 'peso'
-
-def calcular_max(lista_personajes, peso):
-    if not lista_personajes:
+def calcular_max(una_lista, key):
+    if not una_lista:
         return -1
     max_hero = None
-    max_peso = 0
+    max_valor = 0
     primer_dato = True
-    for hero in lista_personajes:
-        hero_peso = float(hero.get(peso, 0))
-        if primer_dato or hero_peso > max_peso:
+    for hero in una_lista:
+        valor = float(hero.get(key, 0))
+        if primer_dato or valor > max_valor:
             max_hero = hero
-            max_peso = hero_peso
+            max_valor = valor
             primer_dato = False
-    return max_hero, max_peso
+    return max_hero, max_valor
 
-def calcular_min(lista_personajes, peso):
-    if not lista_personajes:
+def calcular_min(una_lista, key):
+    if not una_lista:
         return -1
     min_hero = None
-    min_peso = float('inf')
+    min_valor = float('inf')
     primer_dato = True
-    for hero in lista_personajes:
-        hero_peso = float(hero.get(peso, float('inf')))
-        if primer_dato or hero_peso < min_peso:
+    for hero in una_lista:
+        valor = float(hero.get(key, float('inf')))
+        if primer_dato or valor < min_valor:
             min_hero = hero
-            min_peso = hero_peso
+            min_valor = valor
             primer_dato = False
-    return min_hero, min_peso
+    return min_hero, min_valor
 
-def calcular_max_min_dato(lista_personajes, tipo_calculo, peso):
-    if not lista_personajes:
+def calcular_max_min_dato(una_lista, tipo_calculo, key):
+    if not una_lista:
         return "Lista vacía"
     if tipo_calculo == 'maximo':
-        heroe, peso = calcular_max(lista_personajes, peso)
+        heroe, valor = calcular_max(una_lista, key)
     elif tipo_calculo == 'minimo':
-        heroe, peso = calcular_min(lista_personajes, peso)
+        heroe, valor = calcular_min(una_lista, key)
     else:
         return "Tipo de cálculo no válido"
-    return heroe, peso
+    return heroe, valor
 
-
-def stark_calcular_imprimir_heroe(lista_personajes, tipo_calculo, peso):
-    heroe, valor_peso = calcular_max_min_dato(lista_personajes, tipo_calculo, peso)
+def stark_calcular_imprimir_heroe(una_lista, tipo_calculo, key):
+    heroe, valor = calcular_max_min_dato(una_lista, tipo_calculo, key)
     if isinstance(heroe, str):
         print(heroe)
     else:
         nombre = heroe['nombre']
         if tipo_calculo == 'maximo':
-            mensaje = f"Mayor Peso {peso}: Nombre: {nombre} | {peso}: {valor_peso}"
+            mensaje = f"Mayor {key.capitalize()}: Nombre: {nombre} | {key}: {valor}"
         else:
-            mensaje = f"Menor Peso {peso}: Nombre: {nombre} | {peso}: {valor_peso}"
+            mensaje = f"Menor {key.capitalize()}: Nombre: {nombre} | {key}: {valor}"
         print(mensaje)
 
-def sumar_dato_heroe(lista, key):
-    
