@@ -85,7 +85,7 @@ def min_altura_masculino(imprimir_altura=True):
 
     if chekpoint_max_altura:
         if imprimir_altura:
-            print(f"\n----------------- \nSuperheroe mas alto: {min_nombre_m} - Altura: {min_altura} cm")
+            print(f"\n----------------- \nSuperheroe mas bajo: {min_nombre_m} - Altura: {min_altura} cm")
         else:
             print(f"\n----------------- \nEl nombre del Superheroe Masculino mas bajo es: {min_nombre_m}.")
     else:
@@ -109,7 +109,7 @@ def min_altura_femenino(imprimir_altura=True):
 
     if chekpoint_max_altura:
         if imprimir_altura:
-            print(f"\n----------------- \nSuperheroe mas alto: {min_nombre_f} - Altura: {min_altura} cm")
+            print(f"\n----------------- \nSuperheroe mas bajo: {min_nombre_f} - Altura: {min_altura} cm")
         else:
             print(f"\n----------------- \nEl nombre del Superheroe Femenino mas bajo es: {min_nombre_f}.")
     else:
@@ -246,161 +246,4 @@ def listar_heroes_por_iq(lista_personajes):
         print(f"\n Superhéroes con inteligencia {inteligencia_iq}:")
         for heroe in heroes:
             print(f"\n- {heroe}")
-
-#------------------------------------------------/FUNCIONES-#02/---------------------------------------------#
-
-def normalizador_datos_stark(lista_personajes):
-
-    """
-    DOCUMENTACION:: Función que recibe una lista de héroes y convierte al tipo de dato correcto solicitado en la consigna, 
-    en este caso... serian las keys (solo con las keys que representan datos numéricos) y valida primero que el tipo de dato
-    no sea del tipo al cual será casteado para evitar confusiones.
-
-    PARAMETROS: lista_heroes (list): es la lista que va a tomar para normalizar los datos obtenidos y solicitados.
-
-    RETORNO:  (list): Lista de héroes normalizada.
-    """
-
-    if not lista_personajes: # Compruebo si la lista esta vacia con el if not, y si lo esta retorno el resultado del print.
-        print("Error: Lista de héroes vacía")
-        return lista_personajes
-    
-    dato_modificado = False # Compruebo que el dato fue modificado a travez de una bandera.
-    
-    for heroe in lista_personajes:
-        for key, value in heroe.items():
-            if key in ["altura", "peso", "fuerza"]:
-                if isinstance(value, str) and value.replace('.', '', 1).isdigit():
-                    if "." in value:
-                        heroe[key] = float(value)
-                    else:
-                        heroe[key] = int(value)
-                    dato_modificado = True
-    
-    if dato_modificado:
-        print("Datos normalizados")
-    
-    return lista_personajes
-
-def obtener_nombre(heroe):
-
-    """
-    DOCUMENTACIÓN: Función que recibe un diccionario que representa a un héroe y devuelve una cadena de texto con el nombre del mismo.
-    PARAMETROS: heroe (dict): Diccionario que representa a un héroe.
-    RETORNO: (str): Cadena de texto con el nombre del héroe.
-    """
-
-
-    nombre = heroe.get("nombre")
-    return f"Nombres: {nombre}"
-
-def imprimir_dato(dato):
-
-    """
-    DOCUMENTACIÓN: Función que recibe un dato y lo imprime por consola.
-    PARAMETROS: dato (any): Cualquier tipo de dato a imprimir.
-    RETORNO: Nada.
-    """
-
-    print(dato)
-
-def stark_imprimir_nombres_heroes(lista_personajes):
-
-    """
-    DOCUMENTACIÓN: Función que recibe un dato y lo imprime por consola.
-    PARAMETROS: dato (any): Cualquier tipo de dato a imprimir.
-    RETORNO: Nada.
-    """
-
-    if len(lista_personajes) == 0:
-        print("La lista de heroes está vacía")
-    else:
-        for heroe in lista_personajes:
-            nombre = obtener_nombre(heroe)
-            imprimir_dato(nombre)
-
-def obtener_nombre_y_dato(lista_personajes, nombre, altura):
-
-    """
-    DOCUMENTACIÓN: Función que recibe una lista de héroes y se encarga de imprimir por consola los nombres de cada uno.
-    PARAMETROS: lista_personajes (list): Lista de diccionarios que representa a cada héroe.
-    RETORNO: Nada.
-    """
-    
-    for heroe in lista_personajes:
-        if heroe["nombre"] == nombre:
-            dato_altura = heroe.get(altura)
-            if dato_altura is None:
-                return "El héroe no tiene ese dato"
-    return f"No se encontró un héroe con el nombre {nombre}"
-
-def stark_imprimir_nombres_alturas(lista_personajes):
-
-    """
-    DOCUMENTACIÓN:  Función que recibe una lista de héroes y muestra en pantalla el nombre y la altura de aquellos héroes
-    que tengan una altura definida. Si la lista está vacía, se retorna un valor de -1.
-    PARAMETROS: lista_personajes (list): Lista de héroes a procesar.
-    RETORNO: - Si la lista está vacía, se retorna un valor de -1. Si la lista no está vacía, se muestran en pantalla el nombre y la
-    altura de los héroes que tengan una altura definida, pero no se retorna ningún valor.
-    """
-    
-
-    if not lista_personajes:
-        return -1
-    for heroe in lista_personajes:
-        altura = heroe.get("altura")
-        if altura is not None:
-            mensaje = f"Nombre: {heroe['nombre']} | Altura: {altura}"
-            print(mensaje)
-
-def calcular_max(una_lista, key):
-    if not una_lista:
-        return -1
-    max_hero = None
-    max_valor = 0
-    primer_dato = True
-    for hero in una_lista:
-        valor = float(hero.get(key, 0))
-        if primer_dato or valor > max_valor:
-            max_hero = hero
-            max_valor = valor
-            primer_dato = False
-    return max_hero, max_valor
-
-def calcular_min(una_lista, key):
-    if not una_lista:
-        return -1
-    min_hero = None
-    min_valor = float('inf')
-    primer_dato = True
-    for hero in una_lista:
-        valor = float(hero.get(key, float('inf')))
-        if primer_dato or valor < min_valor:
-            min_hero = hero
-            min_valor = valor
-            primer_dato = False
-    return min_hero, min_valor
-
-def calcular_max_min_dato(una_lista, tipo_calculo, key):
-    if not una_lista:
-        return "Lista vacía"
-    if tipo_calculo == 'maximo':
-        heroe, valor = calcular_max(una_lista, key)
-    elif tipo_calculo == 'minimo':
-        heroe, valor = calcular_min(una_lista, key)
-    else:
-        return "Tipo de cálculo no válido"
-    return heroe, valor
-
-def stark_calcular_imprimir_heroe(una_lista, tipo_calculo, key):
-    heroe, valor = calcular_max_min_dato(una_lista, tipo_calculo, key)
-    if isinstance(heroe, str):
-        print(heroe)
-    else:
-        nombre = heroe['nombre']
-        if tipo_calculo == 'maximo':
-            mensaje = f"Mayor {key.capitalize()}: Nombre: {nombre} | {key}: {valor}"
-        else:
-            mensaje = f"Menor {key.capitalize()}: Nombre: {nombre} | {key}: {valor}"
-        print(mensaje)
 
