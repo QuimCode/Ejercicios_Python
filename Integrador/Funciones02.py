@@ -1,3 +1,12 @@
+#----------------------------------------------------------------------------------------------------#
+
+# Quimey Alejo Fontan - Programacion - DIV B - Giovanni - FUNCIONES/DESAFIO-02
+# Desafio Stark
+
+#------------------------------------------------/EXPORTACIONES/----------------------------------------#
+
+from data_stark import lista_personajes 
+
 #------------------------------------------------/FUNCIONES-#02/---------------------------------------------#
 
 def normalizador_datos_stark(una_lista):
